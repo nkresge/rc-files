@@ -69,8 +69,8 @@ if has ("user_commands")
 
 " After phpDoc standard
 let g:pdv_cfg_CommentHead = "/**"
-let g:pdv_cfg_Comment1 = " * "
-let g:pdv_cfg_Commentn = " * "
+let g:pdv_cfg_Comment1 = " *"
+let g:pdv_cfg_Commentn = " *"
 let g:pdv_cfg_CommentTail = " */"
 let g:pdv_cfg_CommentSingle = "//"
 

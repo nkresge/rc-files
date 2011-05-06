@@ -29,7 +29,7 @@ let g:php_folding = 3
 " linewrap
 set nowrap
 
-" navigation 
+" navigation
 "imap <F8> <ESC>:bp<cr>i
 "imap <F7> <ESC>:bn<cr>i
 "nmap <F8> :bp<cr>
@@ -43,14 +43,6 @@ set filetype=php
 let Tlist_Auto_Open = 0
 let Tlist_Exit_OnlyWindow = 1
 let tlist_php_settings = 'php;c:class;d:constant;f:function'
-
-" showmarks
-let g:showmarks_enable=0
-let showmarks_include = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-let g:showmarks_textlower="\t"
-let g:showmarks_textupper="\t"
-let g:showmarks_textother="\t"
-map <silent> <F7> <ESC>:ShowMarksToggle<CR>
 
 " phpdoc commenter
 source ~/.vim/php-doc.vim
@@ -112,13 +104,12 @@ set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
 
 " Appearance
 syntax on
-set hlsearch
-set t_Co=256 " 256 colors
 set background=dark
 colorscheme ir_black
+set hlsearch
 
 " Directories
-set directory=~/backup/vim/swap
+set directory=~/.vimbackup/
 
 
 autocmd FileType html :set omnifunc=htmlcomplete#CompleteTags
@@ -180,5 +171,8 @@ function! MapJoinWithLeaders(leaderText)
   exec "nnoremap <silent> <buffer> J :<C-U>call JoinWithLeader(v:count, '".l:leaderText."')<CR>"
 endfunction
 
-" join comment lines 
+" join comment lines
 call MapJoinWithLeaders('"\\|//\\| \*\\| \*/')
+
+" working directory
+cd ~/t

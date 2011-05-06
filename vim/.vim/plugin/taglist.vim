@@ -2285,6 +2285,8 @@ function! s:Tlist_Process_File(filename, ftype)
 
     call s:Tlist_Log_Msg('Cmd: ' . ctags_cmd)
 
+    "let a = system('echo ' . ctags_cmd . ' > ~/1.out')
+
     " Run ctags and get the tag list
     let cmd_output = system(ctags_cmd)
 
