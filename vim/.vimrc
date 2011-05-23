@@ -61,11 +61,14 @@ set fo+=r
 " find custom
 map ,a :Ack 
 map ,f :Find 
+map ,g :Gtags 
 map ,v :VSFind 
 map ,s :SPFind 
 map ,e :tabedit %<cr>
 map ,t :TlistToggle<cr>
 map ,y :TaskList<cr>
+map <C-n> :cn<CR>
+map <C-b> :cp<CR>
 "imap ,t<F6> <ESC>:TlistToggle<cr>i
 "nmap <F6> :TlistToggle<cr>
 " insert
@@ -74,6 +77,7 @@ imap uu _
 imap hh =>
 imap aa @
 imap kk $_TAG->
+
 
 " num
 "set number
@@ -105,8 +109,17 @@ set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
 " Appearance
 syntax on
 set background=dark
-colorscheme ir_black
+colorscheme coffee
 set hlsearch
+"set guifont=Bitstream\ Vera\ Sans\ Mono:h14
+"set guifont=Anonymous\ Pro:h14
+
+" MacVim
+if has("gui_macvim")
+    set transp=1
+    set anti enc=utf-8 gfn=Anonymous\ Pro:h14,Monaco:h14
+    set fuoptions=maxvert,maxhorz
+endif
 
 " Directories
 set directory=~/.vimbackup/
@@ -119,6 +132,8 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 autocmd FileType c set omnifunc=ccomplete#Complete
+autocmd BufNewFile,BufRead *.jst set filetype=html
+
 
 " Comment leader custom handler
 function! JoinWithLeader(count, leaderText)

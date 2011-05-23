@@ -1,0 +1,32 @@
+[user]
+    name = nkresge
+    email = nkresge@tagged.com
+[color]
+    ui = auto
+[color "branch"]
+    current = blue reverse
+    local = blue
+    remote = green
+[color "diff"]
+    meta = blue
+    frag = magenta
+    old = red
+    new = green
+    whitespace = red reverse
+[color "status"]
+    added = blue
+    changed = green
+    untracked = cyan
+[core]
+    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    excludesfile="/Users/nkresge/git/common-exclusions"
+[log]
+    date=local
+[alias]
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    st = status
+    ci = commit
+    di = diff
+    co = checkout 
+
