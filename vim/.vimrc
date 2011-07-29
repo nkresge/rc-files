@@ -1,3 +1,12 @@
+" leader
+let mapleader = ","
+
+" syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+
 " encoding
 set encoding=utf-8
 
@@ -58,14 +67,14 @@ set fo+=r
 "nnoremap _ f_x~
 
 " Mappings
-" find custom
+map <Leader>x :!run-unit-test.sh %<CR>
 map ,a :Ack 
 map ,f :Find 
 map ,g :Gtags 
 map ,v :VSFind 
 map ,s :SPFind 
 map ,e :tabedit %<cr>
-map ,t :TlistToggle<cr>
+"map ,t :TlistToggle<cr>
 map ,y :TaskList<cr>
 map <C-n> :cn<CR>
 map <C-b> :cp<CR>
@@ -109,7 +118,7 @@ set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
 " Appearance
 syntax on
 set background=dark
-colorscheme coffee
+colorscheme wombat
 set hlsearch
 "set guifont=Bitstream\ Vera\ Sans\ Mono:h14
 "set guifont=Anonymous\ Pro:h14

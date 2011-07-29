@@ -1,9 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
-let g:netrw_dirhist_1='/home/nkresge/git/web/shared/class/tag/apps/mob/model/catalog'
-let g:netrw_dirhist_2='/home/nkresge/git/web/cool'
-let g:netrw_dirhist_3='/home/nkresge/git/web'
-let g:netrw_dirhist_4='/home/nkresge/git/web-hack/coolbin/release'
-let g:netrw_dirhist_5='/home/nkresge/git/web-hack/shared/conf'
-let g:netrw_dirhist_6='/home/nkresge/git/web-hack/shared/conf/stage'
-let g:netrw_dirhist_7='/home/nkresge/git/web-hack/shared/class/tag/apps/elections/model'

@@ -4,3 +4,10 @@
 target/
 *~
 shared/conf/local/
+coolstatic/res/js/closure
+.DS_Store
+GPATH
+GTAGS
+GRTAGS
+Session.vim
+derby.log
