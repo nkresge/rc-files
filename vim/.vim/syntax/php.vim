@@ -3622,4 +3622,6 @@ if main_syntax == 'php'
   unlet main_syntax
 endif
 
-" vim: sw=2 sts=2 et fdm=marker fdc=1
+let s:php_executable = "/usr/bin/php"
+"if !(executable(s:php_executable))
+let makeprg = s:php_executable . " -l %"

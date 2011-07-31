@@ -1,25 +1,43 @@
+filetype off
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
+filetype plugin indent on
+
 " leader
 let mapleader = ","
 
+" tagged env eval
+let g:vimtagged_username='nkresge'
+let g:vimtagged_password='pz;E~xWm~6?!c2JyY~'
+map <Leader>r :call TAGEval()<CR>
+
+" whitespace visible
+set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
+
 " syntastic
+set statusline=%F%m%r%h%w\ [TYPE=%Y\ %{&ff}]\ [%l/%L\ (%p%%)
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_highlight = 1
+"let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+"let g:syntastic_enable_signs=1
 
 " encoding
 set encoding=utf-8
 
 " make
 autocmd QuickFixCmdPre make w
-set makeprg=php\ -l\ %
+"set makeprg=php\ -l\ %
 set errorformat=%m\ in\ %f\ on\ line\ %l
 set keywordprg=pman
 
 " search
 set ic
 set gdefault
-"set incsearch
 
 " tabs
 set expandtab
@@ -29,67 +47,53 @@ set shiftwidth=4
 set smartindent
 set autoindent
 
-" whitespace
-highlight WhitespaceEOL ctermbg=red guibg=red
-match WhitespaceEOL /\s\+$/
 " fold
 set foldmethod=syntax
 let g:php_folding = 3
+
 " linewrap
 set nowrap
-
-" navigation
-"imap <F8> <ESC>:bp<cr>i
-"imap <F7> <ESC>:bn<cr>i
-"nmap <F8> :bp<cr>
-"nmap <F7> :bn<cr>
-"map <F8> :bp<cr>
-"map <F7> :bn<cr>
-
-set filetype=php
 
 " taglist
 let Tlist_Auto_Open = 0
 let Tlist_Exit_OnlyWindow = 1
-let tlist_php_settings = 'php;c:class;d:constant;f:function'
+let Tlist_php_settings = 'php;c:class;d:constant;f:function'
+let Tlist_Ctags_Cmd='/usr/local/bin/ctags'
+let Tlist_GainFocus_On_ToggleOpen = 1
+let Tlist_Close_On_Select = 1
+let Tlist_Use_Right_Window = 1
+let Tlist_File_Fold_Auto_Close = 1
 
 " phpdoc commenter
 source ~/.vim/php-doc.vim
-inoremap ,n <ESC>:call PhpDocSingle()<CR>i
-nnoremap ,n :call PhpDocSingle()<CR>
-vnoremap ,n :call PhpDocRange()<CR>
+inoremap <Leader>n <ESC>:call PhpDocSingle()<CR>i
+nnoremap <Leader>n :call PhpDocSingle()<CR>
+vnoremap <Leader>n :call PhpDocRange()<CR>
 
 " comment continuation
 set fo+=r
 
-" camel under convert
-"nnoremap + /\$\w\+_<CR>
-"nnoremap _ f_x~
-
 " Mappings
+map <F2> :source ~/.vimrc<CR>:echoe "Loaded rc"<CR>
 map <Leader>x :!run-unit-test.sh %<CR>
-map ,a :Ack 
-map ,f :Find 
-map ,g :Gtags 
-map ,v :VSFind 
-map ,s :SPFind 
-map ,e :tabedit %<cr>
-"map ,t :TlistToggle<cr>
-map ,y :TaskList<cr>
+map <Leader>a :Ack 
+map <Leader>f :Find 
+map <Leader>g :Gtags 
+map <Leader>v :VSFind 
+map <Leader>s :SPFind 
+map <Leader>e :tabedit %<cr>
+map <Leader>y :TaskList<cr>
+map <Leader>t :TlistToggle<cr>
+map <Leader>p :Lodgeit<CR>
 map <C-n> :cn<CR>
 map <C-b> :cp<CR>
-"imap ,t<F6> <ESC>:TlistToggle<cr>i
-"nmap <F6> :TlistToggle<cr>
-" insert
 imap jj <Esc>
 imap uu _
-imap hh =>
-imap aa @
+imap hh => 
+imap aa array(
 imap kk $_TAG->
-
-
-" num
-"set number
+" Map <CTRL>-P to check the file for syntax
+:noremap <C-P> :call PHPsynCHK()<CR>
 
 " Make (syntax check)
 function! PHPsynCHK()
@@ -99,31 +103,14 @@ function! PHPsynCHK()
   " return to the window with cursor set on the line of the first error (if any)
   execute winnum . "wincmd w"
 endfunction
-
 :setl makeprg=php
 :set errorformat=%m\ in\ %f\ on\ line\ %l
-" Map <CTRL>-P to check the file for syntax
-:noremap <C-P> :call PHPsynCHK()<CR>
-
-" Show invisible symbols
-set listchars=trail:.,tab:>-,eol:$
-set nolist
-:noremap ,i :set list!<CR> " Toggle invisible chars
-
-" Session
-map <c-q> :mksession! ~/.vim/session/web<cr>
-map <c-s> :source ~/.vim/session/web<cr>
-set sessionoptions=blank,buffers,curdir,folds,help,resize,tabpages,winsize
 
 " Appearance
-syntax on
 set background=dark
-colorscheme wombat
-set hlsearch
-"set guifont=Bitstream\ Vera\ Sans\ Mono:h14
-"set guifont=Anonymous\ Pro:h14
+colorscheme koehler
 
-" MacVim
+" MacVim  conditional
 if has("gui_macvim")
     set transp=1
     set anti enc=utf-8 gfn=Anonymous\ Pro:h14,Monaco:h14
@@ -133,16 +120,14 @@ endif
 " Directories
 set directory=~/.vimbackup/
 
-
-autocmd FileType html :set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-autocmd FileType c set omnifunc=ccomplete#Complete
-autocmd BufNewFile,BufRead *.jst set filetype=html
-
+"autocmd FileType html :set omnifunc=htmlcomplete#CompleteTags
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+"autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+"autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+"autocmd FileType c set omnifunc=ccomplete#Complete
+"autocmd BufNewFile,BufRead *.jst set filetype=html
 
 " Comment leader custom handler
 function! JoinWithLeader(count, leaderText)
@@ -198,5 +183,7 @@ endfunction
 " join comment lines
 call MapJoinWithLeaders('"\\|//\\| \*\\| \*/')
 
-" working directory
+" Default to web project
 cd ~/t
+
+syntax on
