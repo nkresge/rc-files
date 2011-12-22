@@ -3,13 +3,16 @@ call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 filetype plugin indent on
 
+" scrollbinding
+set noscb
+
 " leader
 let mapleader = ","
 
 " tagged env eval
 let g:vimtagged_username='nkresge'
 let g:vimtagged_password='pz;E~xWm~6?!c2JyY~'
-map <Leader>r :call TAGEval()<CR>
+map <Leader>r :TAGEval<CR>
 
 " whitespace visible
 set list listchars=tab:▷⋅,trail:⋅,nbsp:⋅
@@ -85,6 +88,10 @@ map <Leader>e :tabedit %<cr>
 map <Leader>y :TaskList<cr>
 map <Leader>t :TlistToggle<cr>
 map <Leader>p :Lodgeit<CR>
+map <Leader>ca :ConqueTermTab bash <CR>
+map <Leader>cs :ConqueTermTab psql -h gpmaster01.tagged.com -U gpadmin -d prod <CR>
+map <Leader>cd :ConqueTermSplit ssh nkresge@192.168.11.139 ; cd /home/html/ ; phpunit cooltest/unit/tests/shared/class/tag/
+map <Leader>cf :ConqueTermTab git svn rebase <CR>
 map <C-n> :cn<CR>
 map <C-b> :cp<CR>
 imap jj <Esc>
@@ -127,7 +134,7 @@ set directory=~/.vimbackup/
 "autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 "autocmd FileType php set omnifunc=phpcomplete#CompletePHP
 "autocmd FileType c set omnifunc=ccomplete#Complete
-"autocmd BufNewFile,BufRead *.jst set filetype=html
+autocmd BufNewFile,BufRead *.as set filetype=actionscript
 
 " Comment leader custom handler
 function! JoinWithLeader(count, leaderText)

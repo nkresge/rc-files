@@ -1,6 +1,7 @@
 *.iws
 *.ipr
 *.iml
+*.swf
 target/
 *~
 shared/conf/local/
