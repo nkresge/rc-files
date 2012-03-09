@@ -1,7 +1,7 @@
 [reviewboard]
-        url = https://scm.tagged.com/reviewboard
+    url = https://scm.tagged.com/reviewboard
 [user]
-    name = nkresge
+    name = Nate Kresge
     email = nkresge@tagged.com
 [color]
     ui = auto
@@ -20,6 +20,7 @@
     changed = green
     untracked = cyan
 [core]
+    ignorecase=true
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile="/Users/nkresge/git/common-exclusions"
     editor=mvim -v

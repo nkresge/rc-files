@@ -24,10 +24,6 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_highlight = 1
-"let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
-"let g:syntastic_enable_signs=1
 
 " encoding
 set encoding=utf-8
@@ -88,10 +84,6 @@ map <Leader>e :tabedit %<cr>
 map <Leader>y :TaskList<cr>
 map <Leader>t :TlistToggle<cr>
 map <Leader>p :Lodgeit<CR>
-map <Leader>ca :ConqueTermTab bash <CR>
-map <Leader>cs :ConqueTermTab psql -h gpmaster01.tagged.com -U gpadmin -d prod <CR>
-map <Leader>cd :ConqueTermSplit ssh nkresge@192.168.11.139 ; cd /home/html/ ; phpunit cooltest/unit/tests/shared/class/tag/
-map <Leader>cf :ConqueTermTab git svn rebase <CR>
 map <C-n> :cn<CR>
 map <C-b> :cp<CR>
 imap jj <Esc>
@@ -114,8 +106,7 @@ endfunction
 :set errorformat=%m\ in\ %f\ on\ line\ %l
 
 " Appearance
-set background=dark
-colorscheme koehler
+colorscheme dw_blue
 
 " MacVim  conditional
 if has("gui_macvim")
@@ -129,7 +120,7 @@ set directory=~/.vimbackup/
 
 "autocmd FileType html :set omnifunc=htmlcomplete#CompleteTags
 "autocmd FileType python set omnifunc=pythoncomplete#Complete
-"autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 "autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 "autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 "autocmd FileType php set omnifunc=phpcomplete#CompletePHP
@@ -189,8 +180,5 @@ endfunction
 
 " join comment lines
 call MapJoinWithLeaders('"\\|//\\| \*\\| \*/')
-
-" Default to web project
-cd ~/t
 
 syntax on

@@ -1,7 +1,6 @@
 *.iws
 *.ipr
 *.iml
-*.swf
 target/
 *~
 shared/conf/local/
@@ -12,3 +11,6 @@ GTAGS
 GRTAGS
 Session.vim
 derby.log
+.actionScriptProperties
+bin-debug/
+html-template/

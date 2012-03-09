@@ -79,7 +79,7 @@ let g:pdv_cfg_Type = "int"
 let g:pdv_cfg_Package = "tag_web"
 let g:pdv_cfg_SubPackage = ""
 let g:pdv_cfg_Author = "Nate Kresge <nkresge@tagged.com>"
-let g:pdv_cfg_Copyright = "2011 Tagged, Inc. <http://www.tagged.com/>, All Rights Reserved"
+let g:pdv_cfg_Copyright = "2012 Tagged, Inc. <http://www.tagged.com/>, All Rights Reserved"
 
 let g:pdv_cfg_ReturnVal = "void"
 
