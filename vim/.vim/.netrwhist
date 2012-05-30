@@ -1,8 +1,3 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/Users/nkresge/Downloads/AS3 Contact Form'
-let g:netrw_dirhist_2='/Users/nkresge/Downloads/AS3 Contact Form/ActionScript version'
-let g:netrw_dirhist_3='/Users/nkresge/Downloads/AS3 Contact Form/ActionScript version/src'
-let g:netrw_dirhist_4='/Users/nkresge/Downloads/AS3 Contact Form/ActionScript version/src/classes'
-let g:netrw_dirhist_5='/Users/nkresge/Downloads/AS3 Contact Form/ActionScript version/src/classes/com'
-let g:netrw_dirhist_6='/Users/nkresge/Downloads/AS3 Contact Form/ActionScript version/src/classes/com/warmforestflash'
+let g:netrw_dirhist_cnt =1
+let g:netrw_dirhist_1='/Users/nkresge/git/tagged/PubSub/src/main/java/com/tagged/pubsub'

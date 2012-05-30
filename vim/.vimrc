@@ -3,6 +3,10 @@ call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 filetype plugin indent on
 
+" menubar
+set guioptions-=T  "remove toolbar
+
+
 " scrollbinding
 set noscb
 
@@ -75,7 +79,7 @@ set fo+=r
 " Mappings
 map <F2> :source ~/.vimrc<CR>:echoe "Loaded rc"<CR>
 map <Leader>x :!run-unit-test.sh %<CR>
-map <Leader>a :Ack 
+map <Leader>a :Ag 
 map <Leader>f :Find 
 map <Leader>g :Gtags 
 map <Leader>v :VSFind 
@@ -107,6 +111,8 @@ endfunction
 
 " Appearance
 colorscheme dw_blue
+set cursorline
+set cursorcolumn
 
 " MacVim  conditional
 if has("gui_macvim")

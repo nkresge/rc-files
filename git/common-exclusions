@@ -14,3 +14,12 @@ derby.log
 .actionScriptProperties
 bin-debug/
 html-template/
+.idea/
+.project
+.settings/
+link_report.xml
+deploy/
+out/
+Art/
+build.properties
+session/

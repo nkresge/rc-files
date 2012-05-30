@@ -16,9 +16,9 @@ highlight Character           guifg=#eeeeee ctermfg=255                         
 highlight Comment             guifg=#696969 ctermfg=242                           gui=none cterm=none
 highlight Conditional         guifg=#eeeeee ctermfg=255                           gui=none cterm=none
 highlight Constant            guifg=#00ff00 ctermfg=10                            gui=none cterm=none
-highlight Cursor              guifg=#ffffff ctermfg=15  guibg=#444444 ctermbg=238 gui=none cterm=none
-highlight CursorColumn        guifg=#eeeeee ctermfg=255 guibg=#001100 ctermbg=22  gui=none cterm=none
-highlight CursorLine          guifg=#eeeeee ctermfg=255 guibg=#001800 ctermbg=22  gui=none cterm=none
+highlight Cursor              guifg=#ffffff ctermfg=15  guibg=#666666 ctermbg=238 gui=none cterm=none
+highlight CursorColumn        guifg=#eeeeee ctermfg=255 guibg=#660000 ctermbg=22  gui=none cterm=none
+highlight CursorLine          guifg=#eeeeee ctermfg=255 guibg=#880000 ctermbg=22  gui=none cterm=none
 highlight Debug               guifg=#eeeeee ctermfg=255                           gui=none cterm=none
 highlight Define              guifg=#eeeeee ctermfg=255                           gui=none cterm=none
 highlight DefinedName         guifg=#eeeeee ctermfg=255                           gui=none cterm=none

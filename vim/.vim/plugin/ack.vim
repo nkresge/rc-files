@@ -7,6 +7,7 @@
 "   sudo port install p5-app-ack
 
 let g:ackprg="ack\\ -H\\ --nocolor\\ --nogroup"
+let g:agprg="ag\\ --nocolor\\ --nogroup"
 
 function! Ack(args)
     let grepprg_bak=&grepprg
@@ -44,7 +45,17 @@ function! LAckAdd(args)
     exec "redraw!"
 endfunction
 
+function! Ag(args)
+    let grepprg_bak=&grepprg
+    exec "set grepprg=" . g:agprg
+    execute "silent! grep " . a:args
+    botright copen
+    let &grepprg=grepprg_bak
+    exec "redraw!"
+endfunction
+
 command! -nargs=* -complete=file Ack call Ack(<q-args>)
 command! -nargs=* -complete=file AckAdd call AckAdd(<q-args>)
 command! -nargs=* -complete=file LAck call LAck(<q-args>)
 command! -nargs=* -complete=file LAckAdd call LAckAdd(<q-args>)
+command! -nargs=* -complete=file Ag call Ag(<q-args>)
