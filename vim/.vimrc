@@ -5,7 +5,7 @@ filetype plugin indent on
 
 " menubar
 set guioptions-=T  "remove toolbar
-
+set number
 
 " scrollbinding
 set noscb
@@ -110,8 +110,11 @@ endfunction
 :set errorformat=%m\ in\ %f\ on\ line\ %l
 
 " Appearance
-colorscheme dw_blue
+colorscheme miko
 set cursorline
+au WinLeave * set nocursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+
 set cursorcolumn
 
 " MacVim  conditional
