@@ -36,3 +36,4 @@
     rb = !post-review --parent=trunk --guess-description --target-groups=games --username=nkresge -o
     rb-diff = !post-review -n --parent=trunk
     sdiff = !git-svn-diff
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
