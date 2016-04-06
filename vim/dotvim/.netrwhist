@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/Users/nate/vagrant/neon/api'
+let g:netrw_dirhist_2='/usr/local/etc/bash_completion.d'
+let g:netrw_dirhist_3='/Users/nate/git/neon'
+let g:netrw_dirhist_4='/Users/nate/git/neon/neon-codebase/cmsapiv2'
+let g:netrw_dirhist_5='/Users/nate/.vim/bundle/ag.vim/plugin'
+let g:netrw_dirhist_6='/Users/nate/.vim/bundle'
+let g:netrw_dirhist_7='/Users/nate/.vim/bundle/vim-json'
+let g:netrw_dirhist_8='/Users/nate/.vim/bundle/vim-json/ftplugin'
