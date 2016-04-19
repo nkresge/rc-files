@@ -1,8 +1,6 @@
-[reviewboard]
-    url = https://scm.tagged.com/reviewboard
 [user]
     name = Nate Kresge
-    email = nkresge@tagged.com
+    email = kresge@neon-lab.com
 [color]
     ui = auto
 [color "branch"]

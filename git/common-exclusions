@@ -23,3 +23,10 @@ out/
 Art/
 build.properties
 session/
+
+# Ctags output
+ctags
+
+*.DS_Store*
+.working
+.netrwhist
