@@ -20,17 +20,19 @@
 [core]
     ignorecase=true
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-    excludesfile="/Users/nkresge/git/common-exclusions"
+    excludesfile=~/.git/common-exclusions
     editor=mvim -v
 [log]
     date=local
 [alias]
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    s = status
     st = status
     ci = commit
+    d = diff
     di = diff
-    co = checkout 
+    co = checkout
     rb = !post-review --parent=trunk --guess-description --target-groups=games --username=nkresge -o
     rb-diff = !post-review -n --parent=trunk
     sdiff = !git-svn-diff

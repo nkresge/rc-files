@@ -27,6 +27,6 @@ session/
 # Ctags output
 ctags
 
-*.DS_Store*
-.working
-.netrwhist
+*/.DS_Store
+*/.working
+*/.netrwhist
