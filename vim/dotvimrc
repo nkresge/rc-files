@@ -20,6 +20,10 @@ Plugin 'yssl/autocwd.vim'
 Plugin 'rking/ag.vim'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'elzr/vim-json'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
 call vundle#end()
 filetype plugin indent on
 
@@ -42,26 +46,24 @@ nmap <C-b> :cp<CR>
 " Long lines
 set nowrap
 
-" Tabs
-set expandtab
-
 " Appearance
 syntax on
 set guifont=Bitstream\ Vera\ Sans\ Mono:h13
 set number
 hi cursorline cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred
 set cursorline
-colorscheme maui
+"colorscheme maui
+colorscheme molokai
 hi Search guibg=LightBlue
 match ErrorMsg '\%>80v.\+'
 
 " Whitespace
-"highlight ExtraWhitespace ctermbg=red guibg=red
-"match ExtraWhitespace /\s\+$/
-"autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-"autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-"autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-"autocmd BufWinLeave * call clearmatches()
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
 " Python specific
 let python_highlight_all = 1
 
@@ -72,10 +74,13 @@ let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 let g:ctrlp_working_path_mode = 'ra'
-"let g:ctrlp_user_command = "find %s -type f  -not -path '*.git*' -not -path '*.pyc*' -not -path '*.so*' -not -path '.pyenv*' "
-let g:ctrlp_user_command = "find %s -type f -iname '*.py' -not -ipath '*/.pyenv/*'"
-"Next line broken for unknown reason
-"let g:ctrlp_custom_ignore = {'dir':  '\v[\/]\.(git|hg|svn)$', 'file': '\v\.(exe|so|dll|pyc)$'}
+let g:ctrlp_root_markers = ['.working']
+let g:ctrlp_user_command = {
+  \ 'types': {
+    \ 1: ['.git', "cd %s && git ls-files --cached --exclude-standard --others | egrep '.js$|.py$'"],
+    \ },
+  \ 'fallback': 'find %s -type f'
+  \ }
 
 " Pydoc
 let g:pydoc_cmd = 'python -m pydoc'
@@ -92,7 +97,10 @@ set undodir=~/.vim/undo//
 " Cwd management
 " Use AutoCWDPrint to test this map
 let g:autocwd_patternwd_pairs = [
-                        \['*.py', '*REPO*'],
+  \['*.py', '*REPO*'],
+  \['*videojs/*.js', '*REPO*/clickTracking/videojs'],
+  \['*.js', '*REPO*'],
+  \['*', '*REPO*'],
 \]
 
 " Search
@@ -103,3 +111,14 @@ set hlsearch
 
 " Json pretty format
 command! FormatJson %!python -m json.tool
+
+" Folding
+set foldlevelstart=20
+
+" Coffee folding
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
+" Tabs
+set expandtab
+set tabstop=4
+set shiftwidth=4
