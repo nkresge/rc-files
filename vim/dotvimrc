@@ -1,45 +1,66 @@
-" Vundle-required settings
-set nocompatible
-filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
+call plug#begin('~/.vim/plugged')
+Plug 'w0rp/ale'
+"Plug 'vim-syntastic/syntastic'
+Plug 'rust-lang/rust.vim'
+Plug 'mrtazz/simplenote.vim', { 'branch': 'allow-token-instead-of-user-pass' }
+Plug 'VundleVim/Vundle.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'elzr/vim-json'
+Plug 'flazz/vim-colorschemes'
+Plug 'google/styleguide', { 'rtp': 'google_python_style.vm' }
+Plug 'heavenshell/vim-pydocstring'
+Plug 'honza/vim-snippets'
+Plug 'janko-m/vim-test'
+Plug 'kchmck/vim-coffee-script'
+"Plug 'majutsushi/tagbar'
+Plug 'mileszs/ack.vim'
+Plug 'padde/jump.vim'
+Plug 'plasticboy/vim-markdown'
+Plug 'reinh/vim-makegreen'
+Plug 'rking/ag.vim'
+Plug 'tell-k/vim-autopep8'
+Plug 'tmhedberg/SimpylFold'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
+Plug 'yssl/autocwd.vim'
+call plug#end()
 
-" Vundle bundles (:BundleInstall after adding one to install it)
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-"
-" Look up session management plugin
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'fs111/pydoc.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'mileszs/ack.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'google/styleguide', { 'rtp': 'google_python_style.vm' }
-Plugin 'yssl/autocwd.vim'
-Plugin 'rking/ag.vim'
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'elzr/vim-json'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-call vundle#end()
 filetype plugin indent on
 
 " Mappings
 let mapleader ="\<Space>"
+nnoremap <Leader>a :Ack 
+nnoremap <Leader>c :%y+<CR>
+nnoremap <Leader>i oimport pdb<CR>pdb.set_trace()<Esc>j^
+nnoremap <Leader>e :vs ~/.vimrc<CR>
+nnoremap <Leader>fj :FormatJson<CR>
+nnoremap <Leader>fp :Autopep8<CR>
+nnoremap <Leader>j :J 
+nnoremap <Leader>m :set modifiable!<CR>
+nnoremap <Leader>n :SimplenoteList 
 nnoremap <Leader>p :CtrlP<CR>
 nnoremap <Leader>q :q<CR>
-nnoremap <Leader>a :Ack 
-nnoremap <Leader>d :Pydoc 
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>fj :FormatJson<CR>
 nnoremap <Leader>r :set readonly!<CR>
-nnoremap <Leader>m :set modifiable!<CR>
+nnoremap <Leader>s :source ~/.vimrc<CR>
+nnoremap <Leader>v :e ~/.vimrc<CR>
+nnoremap <Leader>w :w<CR>
+nnoremap <silent> <Leader>d :Pydocstring<CR>
+
+" vim test
+nmap <silent> <Leader>tn :TestNearest<CR>
+nmap <silent> <Leader>tf :TestFile<CR>
+nmap <silent> <Leader>ts :TestSuite<CR>
+nmap <silent> <Leader>tl :TestLast<CR>
+nmap <silent> <Leader>tg :TestVisit<CR>
+
+
+let g:test#python#pytest#options = '-xv'
 
 imap jj <Esc>
-nmap <Leader>t :TagbarToggle<CR>
+
 nmap <C-n> :cn<CR>
 nmap <C-b> :cp<CR>
 
@@ -48,14 +69,15 @@ set nowrap
 
 " Appearance
 syntax on
-set guifont=Bitstream\ Vera\ Sans\ Mono:h13
+set guifont=HackNerdFontComplete-Regular:h14
 set number
 hi cursorline cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred
 set cursorline
-"colorscheme maui
+hi cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred
+set cursorcolumn
 colorscheme molokai
 hi Search guibg=LightBlue
-match ErrorMsg '\%>80v.\+'
+match ErrorMsg '\%>99v.\+'
 
 " Whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
@@ -64,6 +86,7 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
 autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
+
 " Python specific
 let python_highlight_all = 1
 
@@ -77,7 +100,7 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.working']
 let g:ctrlp_user_command = {
   \ 'types': {
-    \ 1: ['.git', "cd %s && git ls-files --cached --exclude-standard --others | egrep '.js$|.py$'"],
+    \ 1: ['.git', "cd %s && git ls-files --cached --exclude-standard --others | egrep '.js$|.py$|.hs$|.txt$|.yml$'"],
     \ },
   \ 'fallback': 'find %s -type f'
   \ }
@@ -87,18 +110,15 @@ let g:pydoc_cmd = 'python -m pydoc'
 let g:pydoc_open_cmd = 'vsplit'
 let g:pydoc_use_drop=1
 
-"set autochdir " Working directory follow current buffer
-
 " Backups
-set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
+set backupdir=~/.vim/backup/
+set directory=~/.vim/swap/
+set undodir=~/.vim/undo/
 
 " Cwd management
 " Use AutoCWDPrint to test this map
 let g:autocwd_patternwd_pairs = [
   \['*.py', '*REPO*'],
-  \['*videojs/*.js', '*REPO*/clickTracking/videojs'],
   \['*.js', '*REPO*'],
   \['*', '*REPO*'],
 \]
@@ -115,10 +135,47 @@ command! FormatJson %!python -m json.tool
 " Folding
 set foldlevelstart=20
 
-" Coffee folding
-autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
-
 " Tabs
 set expandtab
 set tabstop=4
 set shiftwidth=4
+
+" Autopep8
+let g:autopep8_aggressive=2
+let g:autopep8_indent_size=4
+let g:autopep8_on_save=0
+let g:autopep8_max_line_length=99
+let g:autopep8_disable_show_diff=1
+
+let test#strategy = "iterm"
+augroup test
+  autocmd!
+  autocmd BufWrite * if test#exists() |
+    \   TestFile |
+    \ endif
+augroup END
+
+
+" Simplenote
+let g:SimplenoteUsername = "trehp2000@yahoo.com"
+"let g:SimplenotePassword = "u66TqRV7aAFfvZ9WtqHa6jW6"
+let g:SimplenoteToken = "93702f5c79664fac964b3af965926285"
+
+" Syntax (Syntastic)
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 1
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 0
+
+let g:ale_linters = {
+\   'python': ['flake8', 'mypy'],
+\}
+let g:ale_python_flake8_options='--ignore=E225,E402,E501'
+let g:ale_python_mypy_options='--ignore-missing-imports'
+
+
+set rtp+=/usr/local/opt/fzf

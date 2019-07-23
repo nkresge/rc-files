@@ -1,0 +1,109 @@
+alias ..='cd ..'
+alias ...='cd ..;cd ..'
+alias ....='cd ..;cd ..;cd ..'
+alias w='cd ~/w'
+alias a='ag'
+alias ack='ag'
+alias cc='cookiecutter'
+alias d='docker'
+alias dc='docker-compose'
+alias g=git
+alias h='howdoi -n10'
+alias i='ipython'
+alias l.='ls -Gd .* '
+alias ll='ls -la'
+alias ls='ls -G'
+alias l='ll'
+alias n='cd ~/git/nkresge'
+alias p='cd ~/git/nkresge/pp'
+alias pytest='pytest -o cache="~/.vim/cache"'
+alias rc='cd ~/git/nate/rc-files'
+alias s='echo [source ~/.bash_profile]; source ~/.bash_profile'
+alias vim=gvim
+alias ga='git add -p'
+alias gcm='git checkout master'
+alias gdm='git diff master'
+alias gpf='git push --force-with-lease'
+alias grm='git rebase master'
+alias grc='git rebase --continue'
+alias gp='git pull'
+alias gsp='git stash pop'
+alias gss='git stash save'
+alias gpu='git push'
+alias tcb='testit containers build'
+alias tct='tcb && testit containers test'
+alias ccf='cookiecutter https://github.com/sloria/cookiecutter-flask.git'
+alias ccp='cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git'
+
+export LSCOLORS=gxfxcxdxbxegedabagacad
+export PS1="\[\033[01;44m\]\w $\[\033[0m\] "
+export PATH=$HOME/.local/bin:~/mxmlc/bin:~/bin:$PATH
+export VISUAL=vim
+export EDITOR="$VISUAL"
+export HISTFILESIZE=10000
+export HISTSIZE=10000
+
+# Avoid duplicates
+export HISTCONTROL=ignoredups:erasedups
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+# After each command, append to the history file and reread it
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"
+
+# Iterm2 stuff
+function iterm2_print_user_vars() {
+  iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
+}
+# bash: Place this in .bashrc.
+# Set badge to show the current session name and git branch, if any is set.
+#printf "\e]1337;SetBadgeFormat=%s\a" \
+#  $(echo -n "\(session.name) \(user.gitBranch)" | base64)
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+source ~/.iterm2_shell_integration.`basename $SHELL`
+source ~/git-completion.bash
+PATH=$PATH:node_modules/.bin
+
+  [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+eval "$(pyenv init -)"
+
+source ~/virtualenvs/3.7.3/bin/activate
+
+# mkdir and cd to it
+md () {
+  mkdir "$1" && cd "$1"
+}
+
+# scaffold for quick coding
+problem () {
+  p=$(echo $(basename $1) | sed s/-/_/g)
+  test_file=${2:-~/__py_templates/__test.py}
+  impl_file=${3:-~/__py_templates/__impl.py}
+  f="$p/solve.py" ; t="$p/test_${p}.py"
+  if [ ! -d $p ]; then
+    mkdir "$p" ; cp "$test_file" "$t" ; cp "$impl_file" "$f" ; touch "$p/__init__.py"
+  fi
+  mvim -O "$f" "$t"
+}
+
+gco () {
+  git clone $1 && cd $(basename $1 | cut -f 1 -d '.')
+}
+
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export COOKIECUTTER_CONFIG='/Users/nate/.cookiecutter.yaml'
+
+
+export PROJECT_ID='f611bd00-0ec3-11e9-84c6-8b67be898c0c'
+export TOKEN='eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6Ik4wVkVNa0kxTkVKRlJUZENRekU1T0RJNU1qVkVNVVExT0RZMVJrSXpPVGN3T0VFeVJqUXhOQSJ9.eyJlbWFpbCI6Im5rcmVzZ2VAcXVpZC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiaXNzIjoiaHR0cHM6Ly9xdWlkLWRldmVsb3BtZW50LmF1dGgwLmNvbS8iLCJzdWIiOiJnb29nbGUtb2F1dGgyfDExMzUxMjY1Mjg2NzY4NTA1ODk5MSIsImF1ZCI6IjVoVUUzaGVhWDJKeEVmRENyMXg0UkYyUzZpVjFZNFl3IiwiaWF0IjoxNTQ4OTEwMjAzLCJleHAiOjE1NTY4MDAyMDN9.bVmIEbaiibWGWDvNdKCdH15wuAjN788Nuu4Y9DjJWXZsoMGswqL1Ae9VHtzopXXZdJYjG6Ctt6R-dfNKS7-uR93aqjlLjqdEQHgItXuR5a6ZL6bY-TgMzIFggthyBdI_1O0QAjg798EI1KjCVziIFFnqpbz20t0Yn1yR0zOaJ42_pzFY75JyVx_A4np4vAgAda6H4ZcLWpd8qlsyJWIaPNtJLckbackUxo5z60Ohu8BFzSI_HUAEKIeoLkzb1_Ial2YyN6W84b44RKRnF3KNfkoeHBkXOAq2141_mpuV0r2EYxkiFJkO8qt2sLhnpUBzAPn0Us2xZ5s8xrjPzGSS1Q'
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export VAULT_ADDR=http://vault-server.in.quid.com
+
+export GOPATH="$HOME/go"
+
+export PIPENV_IGNORE_VIRTUALENVS=1
