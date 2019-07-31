@@ -30,3 +30,6 @@ ctags
 */.DS_Store
 */.working
 */.netrwhist
+
+**/public
+**/assets

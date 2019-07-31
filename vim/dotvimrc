@@ -1,4 +1,5 @@
 call plug#begin('~/.vim/plugged')
+Plug 'flazz/vim-colorschemes'
 Plug 'w0rp/ale'
 "Plug 'vim-syntastic/syntastic'
 Plug 'rust-lang/rust.vim'
@@ -69,7 +70,7 @@ set nowrap
 
 " Appearance
 syntax on
-set guifont=HackNerdFontComplete-Regular:h14
+set guifont=HackNerdFontComplete-Regular:h16
 set number
 hi cursorline cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred
 set cursorline
@@ -91,7 +92,7 @@ autocmd BufWinLeave * call clearmatches()
 let python_highlight_all = 1
 
 " Ag
-let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ackprg = 'rg --ignore-file ~/.git/common-exclusions --column'
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
@@ -100,10 +101,11 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.working']
 let g:ctrlp_user_command = {
   \ 'types': {
-    \ 1: ['.git', "cd %s && git ls-files --cached --exclude-standard --others | egrep '.js$|.py$|.hs$|.txt$|.yml$'"],
+    \ 1: ['.git', "cd %s && git ls-files --cached --exclude-standard --others | egrep '.js$|.py$|.hs$|.txt$|.yml$|.json$|.jsx$|.ts$|.tsx|.yml$|.yaml$$'"],
     \ },
   \ 'fallback': 'find %s -type f'
   \ }
+let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:50,results:50'
 
 " Pydoc
 let g:pydoc_cmd = 'python -m pydoc'
@@ -137,12 +139,12 @@ set foldlevelstart=20
 
 " Tabs
 set expandtab
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 " Autopep8
 let g:autopep8_aggressive=2
-let g:autopep8_indent_size=4
+let g:autopep8_indent_size=2
 let g:autopep8_on_save=0
 let g:autopep8_max_line_length=99
 let g:autopep8_disable_show_diff=1
@@ -155,11 +157,9 @@ augroup test
     \ endif
 augroup END
 
-
 " Simplenote
 let g:SimplenoteUsername = "trehp2000@yahoo.com"
-"let g:SimplenotePassword = "u66TqRV7aAFfvZ9WtqHa6jW6"
-let g:SimplenoteToken = "93702f5c79664fac964b3af965926285"
+let g:SimplenoteToken = ""
 
 " Syntax (Syntastic)
 "set statusline+=%#warningmsg#
@@ -173,9 +173,9 @@ let g:SimplenoteToken = "93702f5c79664fac964b3af965926285"
 
 let g:ale_linters = {
 \   'python': ['flake8', 'mypy'],
+\   'javascript': ['eslint'],
 \}
 let g:ale_python_flake8_options='--ignore=E225,E402,E501'
 let g:ale_python_mypy_options='--ignore-missing-imports'
-
 
 set rtp+=/usr/local/opt/fzf

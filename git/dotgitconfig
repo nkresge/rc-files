@@ -2,30 +2,32 @@
     name = Nate Kresge
     email = nate@picnichealth.com
 [color]
-    ui = auto
+	ui = auto
 [color "branch"]
-    current = blue reverse
-    local = blue
-    remote = green
+    current = magenta reverse
+    local = green bold
+    remote = red bold
 [color "diff"]
-    meta = blue
-    frag = magenta
-    old = red
+    meta = black bold
+    frag = magenta bold
+    old = red blink
+    plain = yellow
     new = green
-    whitespace = red reverse
+    whitespaces = red reverse
 [color "status"]
-    added = blue
-    changed = green
-    untracked = cyan
+    added = green
+    changed = cyan
+    untracked = red
 [core]
     ignorecase=true
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile=~/.git/common-exclusions
-    editor=mvim -v
+    editor=vim
 [log]
     date=local
 [alias]
     b = branch --sort=-committerdate
+    l = log
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
     s = status
