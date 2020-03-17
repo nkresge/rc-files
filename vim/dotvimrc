@@ -1,5 +1,4 @@
 call plug#begin('~/.vim/plugged')
-Plug 'flazz/vim-colorschemes'
 Plug 'w0rp/ale'
 "Plug 'vim-syntastic/syntastic'
 Plug 'rust-lang/rust.vim'
@@ -16,7 +15,7 @@ Plug 'kchmck/vim-coffee-script'
 "Plug 'majutsushi/tagbar'
 Plug 'mileszs/ack.vim'
 Plug 'padde/jump.vim'
-Plug 'plasticboy/vim-markdown'
+"Plug 'plasticboy/vim-markdown'
 Plug 'reinh/vim-makegreen'
 Plug 'rking/ag.vim'
 Plug 'tell-k/vim-autopep8'
@@ -27,12 +26,16 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'yssl/autocwd.vim'
+Plug 'stephpy/vim-yaml'
+Plug 'leafgarland/typescript-vim'
 call plug#end()
 
 filetype plugin indent on
 
 " Mappings
 let mapleader ="\<Space>"
+nnoremap <Leader>C :CtrlPClearAllCaches<CR>
+nnoremap <Leader>G :Gblame<CR>
 nnoremap <Leader>a :Ack 
 nnoremap <Leader>c :%y+<CR>
 nnoremap <Leader>i oimport pdb<CR>pdb.set_trace()<Esc>j^
@@ -42,12 +45,15 @@ nnoremap <Leader>fp :Autopep8<CR>
 nnoremap <Leader>j :J 
 nnoremap <Leader>m :set modifiable!<CR>
 nnoremap <Leader>n :SimplenoteList 
+nnoremap <Leader>o :on<CR>
 nnoremap <Leader>p :CtrlP<CR>
 nnoremap <Leader>q :q<CR>
+nnoremap <Leader>qq :q!<CR>
 nnoremap <Leader>r :set readonly!<CR>
 nnoremap <Leader>s :source ~/.vimrc<CR>
 nnoremap <Leader>v :e ~/.vimrc<CR>
 nnoremap <Leader>w :w<CR>
+nnoremap <Leader>z :vs<CR>
 nnoremap <silent> <Leader>d :Pydocstring<CR>
 
 " vim test
@@ -76,7 +82,7 @@ hi cursorline cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred
 set cursorline
 hi cursorcolumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred
 set cursorcolumn
-colorscheme molokai
+colorscheme deus  "Also try: dracula
 hi Search guibg=LightBlue
 match ErrorMsg '\%>99v.\+'
 
@@ -92,7 +98,7 @@ autocmd BufWinLeave * call clearmatches()
 let python_highlight_all = 1
 
 " Ag
-let g:ackprg = 'rg --ignore-file ~/.git/common-exclusions --column'
+let g:ackprg = 'rg --smart-case --ignore-file ~/.git/common-exclusions --column'
 
 " CtrlP
 let g:ctrlp_map = '<c-p>'
@@ -101,7 +107,7 @@ let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_root_markers = ['.working']
 let g:ctrlp_user_command = {
   \ 'types': {
-    \ 1: ['.git', "cd %s && git ls-files --cached --exclude-standard --others | egrep '.js$|.py$|.hs$|.txt$|.yml$|.json$|.jsx$|.ts$|.tsx|.yml$|.yaml$$'"],
+    \ 1: ['.git', "cd %s && git ls-files --cached --exclude-standard --others | egrep '.sh$|.js$|.py$|.hs$|.txt$|.yml$|.json$|.jsx$|.ts$|.tsx|.yml$|.yaml$|Makefile|Dockerfile|.md$|.snap$'"],
     \ },
   \ 'fallback': 'find %s -type f'
   \ }
@@ -149,17 +155,17 @@ let g:autopep8_on_save=0
 let g:autopep8_max_line_length=99
 let g:autopep8_disable_show_diff=1
 
-let test#strategy = "iterm"
-augroup test
-  autocmd!
-  autocmd BufWrite * if test#exists() |
-    \   TestFile |
-    \ endif
-augroup END
+"let test#strategy = "iterm"
+"augroup test
+"  autocmd!
+"  autocmd BufWrite * if test#exists() |
+"    \   TestFile |
+"    \ endif
+"augroup END
 
 " Simplenote
 let g:SimplenoteUsername = "trehp2000@yahoo.com"
-let g:SimplenoteToken = ""
+let g:SimplenoteToken = "93702f5c79664fac964b3af965926285"
 
 " Syntax (Syntastic)
 "set statusline+=%#warningmsg#
@@ -172,10 +178,39 @@ let g:SimplenoteToken = ""
 " let g:syntastic_check_on_wq = 0
 
 let g:ale_linters = {
-\   'python': ['flake8', 'mypy'],
+\   'python': ['pylint', 'mypy'],
 \   'javascript': ['eslint'],
+\   'typescript': [],
 \}
-let g:ale_python_flake8_options='--ignore=E225,E402,E501'
+"let g:ale_python_flake8_options='--ignore=E111,E114,E121,E225,E402,E501'
+let g:ale_python_flake8_options=''
 let g:ale_python_mypy_options='--ignore-missing-imports'
+let g:ale_fixers = {
+\   'javascript': ['importjs', 'eslint', 'remove_trailing_lines', 'trim_whitespace']
+\}
+let g:ale_fix_on_save = 1
 
 set rtp+=/usr/local/opt/fzf
+
+set autoread
+
+au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml foldmethod=indent
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType python setlocal ts=2 sts=2 sw=2 expandtab
+
+"set number relativenumber
+"
+"augroup numbertoggle
+"  autocmd!
+"  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+"augroup END
+
+
+" Visible tabs
+set listchars=tab:>-,trail:-
+set list
+
+
+" Scroll bars off
+set guioptions=

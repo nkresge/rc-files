@@ -1,6 +1,6 @@
 [user]
-    name = Nate Kresge
-    email = nate@picnichealth.com
+	name = Nate Kresge
+	email = nate@picnichealth.com
 [color]
 	ui = auto
 [color "branch"]
@@ -23,10 +23,13 @@
     whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
     excludesfile=~/.git/common-exclusions
     editor=vim
+[diff]
+	tool = vimdiff
 [log]
     date=local
 [alias]
     b = branch --sort=-committerdate
+    bl = blame
     l = log
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
@@ -42,3 +45,12 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [push]
 	default = current
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
