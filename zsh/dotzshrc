@@ -1,0 +1,277 @@
+alias .....='cd ..;cd ..;cd ..; cd ..'
+alias ....='cd ..;cd ..;cd ..'
+alias ...='cd ..;cd ..'
+alias ..='cd ..'
+a () {
+  rg "$@" | less -iR
+}
+#j [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
+alias b='vi ~/.bash_profile'
+alias cc='cookiecutter'
+alias ccf='cookiecutter https://github.com/sloria/cookiecutter-flask.git'
+alias ccp='cookiecutter https://github.com/audreyr/cookiecutter-pypackage.git'
+alias d='docker'
+alias dc='docker-compose'
+alias dk='docker ps -q | xargs docker kill'
+alias dps='docker ps'
+alias f='fzf'
+alias fp='docker exec -it $(docker ps -q)'
+alias fifth="awk '{print \$5}'"
+alias first="awk '{print \$1}'"
+alias fourth="awk '{print \$4}'"
+alias fu='fuck --yeah'
+alias g='git'
+alias ga='git add -p'
+alias gam='git ci --amend --all --no-edit'
+alias gb='git branch'
+alias gbb='gb | head -1 | third'
+alias gc='git checkout ; [[ `gbb` != "master" ]] && export CURRENT_BRANCH=`gbb`'
+alias gcc='git checkout $CURRENT_BRANCH'
+alias gci='git ci -amfixup!'
+alias gcm='git checkout master'
+alias gcmp='gcm && gp'
+alias gdm='git diff master'
+alias gdmn='gdm --name-only'
+alias gdmv='vim -O `gdm --name-only`'
+alias gg='rg -u --no-ignore'
+alias gp='git pull'
+alias gpf='git push --force-with-lease'
+alias grc='git rebase --continue'
+alias grs='git rebase --skip'
+alias grm='git rebase master'
+alias grma='bbb=`g status | head -1 | third`; gcmp; g co $bbb; grm'
+alias gsl='git stash list'
+alias gsp='git stash pop'
+alias gss='git stash save'
+alias h='howdoi -n10'
+alias hg='rg'
+alias hi='history'
+alias hl='history | tail -10'
+alias i='ipython'
+alias k='kubectl'
+alias kk='ll'
+alias l=ll
+alias less='less -iGR'
+alias ll="ls -altr"
+alias l.='ls -Gd .* '
+alias ls='ls -G'
+alias lsl='ll'
+alias lll='ll'
+alias m='make'
+alias make='time make --quiet'
+alias pe='docker exec -it $(d ps | grep h-app | first) zsh'
+alias pl='docker logs -f --tail 1000 $(d ps | grep h-app | first)'
+alias pll='docker logs $(d ps | grep h-app | first)'
+alias pln='docker logs --tail 1000 $(d ps | grep h-app | first)'
+alias pls='docker logs $(d ps | grep h-app | first) --since'
+alias pytest='pytest -o cache="~/.vim/cache"'
+alias rc='cd ~/git/nate/rc-files'
+alias rg='rg -pS --ignore-file ~/.ignore'
+alias s='echo source ~/.zshrc; source ~/.zshrc'
+alias so='source'
+alias second="awk '{print \$2}'"
+alias sixth="awk '{print \$6}'"
+alias tcb='testit containers build'
+alias tct='tcb && testit containers test'
+alias third="awk '{print \$3}'"
+alias v='view'
+alias vf='vi `fzf`'
+alias w='cd ~/w'
+alias ya=yarn
+alias ypl='yarn --pure-lockfile'
+
+export CLOUDSDK_PYTHON=python3  # Fix warning about python2
+export COOKIECUTTER_CONFIG='/Users/nate/.cookiecutter.yaml'
+export GOPATH="$HOME/go"
+export HISTCONTROL=ignoredups:erasedups  # Avoid duplicates
+export HISTFILESIZE=10000
+export HISTSIZE=10000
+export LSCOLORS=gxfxcxdxbxegedabagacad
+export NVM_DIR="$HOME/.nvm"
+export PATH='/usr/local/opt/postgresql@11/bin:/Users/nkresge/.pyenv/plugins/pyenv-virtualenv/shims:/Users/nkresge/.pyenv/shims:/Users/nkresge/.local/bin:/Users/nkresge/mxmlc/bin:/Users/nkresge/bin:/bin:/Users/nkresge/.cargo/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:node_modules/.bin:~/curls:~/go/bin:~/Downloads/istio-1.2.4/bin'
+export PIPENV_IGNORE_VIRTUALENVS=1
+export PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND$'\n'}history -a; history -c; history -r"  # After each command, append to the history file and reread it
+export PS1="\[\033[01;44m\]\w $\[\033[0m\] "
+export PYENV_ROOT="$HOME/.pyenv"
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export VAULT_ADDR=http://vault-server.in.quid.com
+export EDITOR=vim
+export VISUAL=mvim
+
+# iterm
+source ~/.iterm2_shell_integration.`basename $SHELL`
+
+iterm2_print_user_vars() {
+  iterm2_set_user_var gitBranch $((git branch 2> /dev/null) | grep \* | cut -c3-)
+}
+
+dd () {
+  docker exec -it $(docker ps -q | head -${1:-1} | tail -1) ${2:-bash}
+}
+
+dsize () {
+  docker image inspect $1 | jq .[].Size
+}
+
+md () {
+  mkdir -p "$1" && cd "$1"
+}
+
+gcb () {
+  git checkout -b $1 || gc $1
+}
+
+problem () {
+  p=$(echo $(basename $1) | sed s/-/_/g)
+  test_file=${2:-~/__py_templates/__test.py}
+  impl_file=${3:-~/__py_templates/__impl.py}
+  f="$p/solve.py" ; t="$p/test_${p}.py"
+  if [ ! -d $p ]; then
+    mkdir "$p" ; cp "$test_file" "$t" ; cp "$impl_file" "$f" ; touch "$p/__init__.py"
+  fi
+  mvim -O "$f" "$t"
+}
+
+gco () {
+  git clone $1 && cd $(basename $1 | cut -f 1 -d '.')
+}
+
+gcod () {
+  git clone --depth 10 $1 && cd $(basename $1 | cut -f 1 -d '.')
+}
+
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
+
+sp () {
+  git stash pop stash@{$1:0}
+}
+
+fin () {
+  find . -not -iwholename '*.git*' -not -iwholename '*node_modules*' -and -iwholename "*${1}*"
+}
+
+yi () {
+  yarn info "$1" | head -20
+}
+
+eval "$(pyenv init -)"
+
+# make tab completion
+# complete -W "`([[ -r Makefile ]] && grep -oE '^[a-zA-Z0-9_-][a-zA-Z0-9_.-]+:([^=]|$)' Makefile || cat /dev/null) | sed 's/[^a-zA-Z0-9_-]*$//'`" make
+
+# iterm badge
+printf "\e]1337;SetBadgeFormat=%s\a" $(echo -n "\(session.name) \(user.gitBranch)" | base64)
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# source <(kubectl completion bash)
+# complete -F __start_kubectl k
+# __git_complete  g _git
+
+export GPG_TTY=$(tty)
+export PS1="%1~ %# "
+
+# z dir jump
+. /usr/local/etc/profile.d/z.sh
+
+# ruby rvm
+export PATH="$PATH:$HOME/.rvm/bin"
+
+#export LESS='less --quit-if-one-screen --ignore-case --status-column --LONG-PROMPT --RAW-CONTROL-CHARS --HILITE-UNREAD --tabs=4 --no-init --window=-4'
+export LESS='-F -X -i -J -M -R -W -x4 -z-4'
+export PAGER='less'
+
+# Set colors for less. Borrowed from https://wiki.archlinux.org/index.php/Color_output_in_console#less .
+export LESS_TERMCAP_mb=$'\E[1;31m'     # begin bold
+export LESS_TERMCAP_md=$'\E[1;36m'     # begin blink
+export LESS_TERMCAP_me=$'\E[0m'        # reset bold/blink
+export LESS_TERMCAP_so=$'\E[01;44;33m' # begin reverse video
+export LESS_TERMCAP_se=$'\E[0m'        # reset reverse video
+export LESS_TERMCAP_us=$'\E[1;32m'     # begin underline
+export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
+
+# js nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# Created by `userpath` on 2020-11-13 19:45:32
+export PATH="$PATH:/Users/nathaniel.kresge/.local/bin"
+
+# postgres
+export PATH="/usr/local/opt/libpq/bin:$PATH"
+
+# history test
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=10000000
+SAVEHIST=10000000
+setopt BANG_HIST                 # Treat the '!' character specially during expansion.
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt HIST_BEEP                 # Beep when accessing nonexistent history.
+ulimit -n 2048
+
+alias mostcommits='git log --name-only --pretty=format: | sort | uniq -c | sort -nr'
+
+trim() { printf '%.*s' $2 "$1";}
+
+alias b='bundle'
+alias be='bundle exec'
+alias beg='bundle exec guard'
+alias ber='bundle exec rspec'
+alias beru='bundle exec rubocop'
+alias rgc='rg --color=never'
+alias gd='g d'
+alias gs='g s'
+alias j='jest --collectCoverage=false'
+alias jf='j $(fzf -qtest)'
+alias jw="j --watch"
+alias rf='rspec $(fzf)'
+alias sb='yarn storybook'
+alias fv='fzf | pbcopy'
+alias rfu='rf --default-path ./unit_spec'
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
+
+alias pickone="find . \( -iname '*.js' -or -iname '*.jsx' -or -iname '*.rb' \) -and -not -iwholename '*node_modules*' | shuf -n 1"
+alias pickonej="find . \( -iname '*.js' -or -iname '*.jsx' \) -and -not -iwholename '*node_modules*' | shuf -n 1"
+
+function rgcb {
+  rgc $1 -l | xargs git blame | rg $1
+}
+
+alias now='date +%s'
+alias gbs='git checkout -b `now`'
+
+alias rs='rspec -O --fail-fast'
+
+alias gbh='git b| head'
+alias gdn='git diff --name-only'
+alias gl='git log'
+alias gc='git checkout'
+alias gca='git commit --amend'
+alias grim='git rebase --interactive master'
+
+alias gz='g co $(gbh | grep -v master | head -1)'
+alias gzz='g co $(gbh | grep -v master | head -2 | tail -1)'
+alias gzzz='g co $(gbh | grep -v master | head -3 | tail -1)'
+
+alias gr='g rm $(fzf)'
+
+# ctrl-s search
+stty -ixon
+
+export CUCUMBER_PUBLISH_QUIET=true
+export PATH="/usr/local/sbin:$PATH"
+
+# autocomplete
+autoload -Uz compinit && compinit

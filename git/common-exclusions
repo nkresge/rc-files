@@ -33,3 +33,13 @@ ctags
 
 **/public
 **/assets
+
+test_log.log
+test_log.log.age
+yarn-error.log
+storybook-static/
+
+report**json
+.tool-versions
+
+.commit_sha

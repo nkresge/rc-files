@@ -1,47 +1,51 @@
+[gpg]
+	program = gpg2
 [user]
 	name = Nate Kresge
-	email = nate@picnichealth.com
+	email = kresge@gmail.com
 [color]
 	ui = auto
 [color "branch"]
-    current = magenta reverse
-    local = green bold
-    remote = red bold
+  current = magenta reverse
+  local = green bold
+  remote = red bold
 [color "diff"]
-    meta = black bold
-    frag = magenta bold
-    old = red blink
-    plain = yellow
-    new = green
-    whitespaces = red reverse
+  meta = black bold
+  frag = magenta bold
+  old = red blink
+  plain = yellow
+  new = green
+  whitespaces = red reverse
 [color "status"]
-    added = green
-    changed = cyan
-    untracked = red
+  added = green
+  changed = cyan
+  untracked = red
 [core]
-    ignorecase=true
-    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
-    excludesfile=~/.git/common-exclusions
-    editor=vim
+  ignorecase=true
+  whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  excludesfile=~/.git/common-exclusions
+  editor=vim
 [diff]
 	tool = vimdiff
 [log]
-    date=local
+  date=local
 [alias]
-    b = branch --sort=-committerdate
-    bl = blame
-    l = log
-    lol = log --graph --decorate --pretty=oneline --abbrev-commit
-    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-    s = status
-    st = status
-    ci = commit
-    d = diff
-    di = diff
-    co = checkout
-    rb = !post-review --parent=trunk --guess-description --target-groups=games --username=nkresge -o
-    rb-diff = !post-review -n --parent=trunk
-    sdiff = !git-svn-diff
+  b = branch --sort=-committerdate
+  bl = blame
+  cp = cherry-pick
+  l = log
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  s = status
+  st = status
+  ci = commit
+  d = diff
+  di = diff
+  co = checkout
+  r = rebase
+  rb = !post-review --parent=trunk --guess-description --target-groups=games --username=nkresge -o
+  rb-diff = !post-review -n --parent=trunk
+  sdiff = !git-svn-diff
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 [push]
 	default = current
