@@ -227,3 +227,4 @@ set laststatus=2
 
 " TODO put this in a perm place
 hi cursorline ctermbg=blue guibg=blue
+nmap cp :let @" = expand("%")<cr>
